@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- iOS reads the icon of the installed app from this link, not from
+         the web manifest. The route falls back on Odoo's icon. -->
+    <template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap">
+        <xpath expr="//link[@rel='apple-touch-icon']" position="attributes">
+            <attribute name="href">/home_screen_designer/pwa_icon/180.png</attribute>
+        </xpath>
+    </template>
+</odoo>

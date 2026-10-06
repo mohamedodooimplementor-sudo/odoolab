@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- ============================================================ -->
+    <!-- Greeting and clock                                            -->
+    <!-- ============================================================ -->
+    <t t-name="home_screen_designer.Header">
+        <div t-if="this.visible" class="hsd-header">
+            <div t-if="this.cfg.clock" class="hsd-clock" t-out="this.state.time"/>
+            <div t-if="this.cfg.clock and this.cfg.show_date" class="hsd-date" t-out="this.state.date"/>
+            <div t-if="this.cfg.greeting" class="hsd-greeting">
+                <t t-out="this.state.greeting"/><t t-if="this.firstName">, <t t-out="this.firstName"/></t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="home_screen_designer.NativeHeader">
+        <div t-if="this.visible" class="hsd-native-header" t-ref="root">
+            <HsdHeader/>
+            <div t-if="this.cfg.search" class="hsd-search">
+                <svg class="hsd-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+                </svg>
+                <input type="text" class="hsd-search-input"
+                       placeholder="Search apps and menus…"
+                       aria-label="Search apps and menus"
+                       autocomplete="off"
+                       t-on-input="(ev) => this.onSearchInput(ev)"
+                       t-on-click="() => this.openSearch()"/>
+            </div>
+        </div>
+    </t>
+
+    <!-- ============================================================ -->
+    <!-- Community home screen                                         -->
+    <!-- ============================================================ -->
+    <t t-name="home_screen_designer.Home">
+        <div class="o_hsd_home">
+            <div class="hsd-inner">
+                <HsdHeader/>
+                <div t-if="this.cfg.search" class="hsd-search">
+                    <svg class="hsd-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+                    </svg>
+                    <input type="text" class="hsd-search-input" t-ref="search"
+                           placeholder="Search apps and menus…"
+                           aria-label="Search apps and menus"
+                           t-att-value="this.state.query"
+                           t-on-input="(ev) => this.onInput(ev)"
+                           t-on-keydown="(ev) => this.onKeydown(ev)"/>
+                </div>
+
+                <div t-if="this.apps.length" class="o_apps" role="listbox" t-ref="grid">
+                    <div t-foreach="this.apps" t-as="app" t-key="app.id" class="hsd-app-cell"
+                         t-att-data-xmlid="app.xmlid"
+                         t-att-style="this.appStyle(app_index)">
+                        <a class="o_app" t-att-class="{ o_focused: this.isFocused(app_index) }"
+                           role="option" t-att-href="app.href" t-att-data-menu-xmlid="app.xmlid"
+                           t-att-title="app.label"
+                           t-on-click="(ev) => this.onClick(ev, app)">
+                            <img t-if="app.webIconData" class="o_app_icon" t-att-src="app.webIconData" alt=""/>
+                            <div t-else="" class="o_app_icon hsd-font-icon"
+                                 t-attf-style="background-color: {{ app.webIcon.backgroundColor }};">
+                                <i t-att-class="app.webIcon.icon" t-attf-style="color: {{ app.webIcon.color }};"/>
+                            </div>
+                            <div class="o_caption" t-out="app.label"/>
+                        </a>
+                    </div>
+                </div>
+
+                <div t-if="this.menuItems.length" class="hsd-menu-results">
+                    <a t-foreach="this.menuItems" t-as="item" t-key="item.id"
+                       class="hsd-menu-result"
+                       t-att-class="{ o_focused: this.isFocused(this.apps.length + item_index) }"
+                       t-att-href="item.href"
+                       t-on-click="(ev) => this.onClick(ev, item)">
+                        <span class="hsd-menu-parents" t-if="item.parents" t-out="item.parents + ' /'"/>
+                        <span class="hsd-menu-label" t-out="item.label"/>
+                    </a>
+                </div>
+
+                <div t-if="this.query and !this.apps.length and !this.menuItems.length" class="hsd-no-result">
+                    No result
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- ============================================================ -->
+    <!-- Top bar button                                                -->
+    <!-- ============================================================ -->
+    <t t-name="home_screen_designer.Systray">
+        <div class="o_hsd_systray d-flex align-items-center">
+            <button type="button" class="o-dropdown dropdown-toggle o_hsd_systray_btn"
+                    t-att-class="{ active: this.active }"
+                    title="Customize the home screen" aria-label="Customize the home screen"
+                    t-on-click="() => this.onClick()">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="2"/>
+                    <rect x="14" y="3" width="7" height="7" rx="2"/>
+                    <rect x="3" y="14" width="7" height="7" rx="2"/>
+                    <path d="M14.5 20.5l.6-2.4 4.6-4.6a1.3 1.3 0 0 1 1.8 1.8l-4.6 4.6z"/>
+                </svg>
+            </button>
+        </div>
+    </t>
+
+    <!-- ============================================================ -->
+    <!-- Background layer and designer panel                           -->
+    <!-- ============================================================ -->
+    <t t-name="home_screen_designer.Backdrop">
+        <div class="hsd-backdrop" aria-hidden="true"><div class="hsd-backdrop-img"/></div>
+    </t>
+
+    <t t-name="home_screen_designer.PanelContainer">
+        <HsdBackdrop/>
+        <HsdPanel t-if="this.open"/>
+    </t>
+
+    <t t-name="home_screen_designer.Panel">
+        <aside class="o_hsd_panel" role="dialog" aria-label="Home Screen Designer">
+            <header class="hsd-panel-head">
+                <div>
+                    <div class="hsd-panel-title">Home Screen Designer</div>
+                    <div class="hsd-panel-status" t-out="this.statusText"/>
+                </div>
+                <button type="button" class="btn-close" aria-label="Close" title="Close (Esc)"
+                        t-on-click="() => this.cancel()"/>
+            </header>
+
+            <div class="hsd-panel-body">
+                <section t-foreach="this.sections" t-as="section" t-key="section.id" class="hsd-section">
+                    <h3 class="hsd-section-title" t-out="section.title"/>
+                    <t t-foreach="section.controls" t-as="control" t-key="control.key">
+                        <!-- Slider -->
+                        <div t-if="control.type === 'range'" class="hsd-control">
+                            <label class="hsd-label">
+                                <span t-out="control.label"/>
+                                <span class="hsd-value"><t t-out="this.cfg[control.key]"/><t t-out="control.unit or ''"/></span>
+                            </label>
+                            <input type="range" class="form-range" t-att-min="control.min" t-att-max="control.max"
+                                   t-att-value="this.cfg[control.key]"
+                                   t-on-input="(ev) => this.onRange(control, ev)"/>
+                        </div>
+                        <!-- Switch -->
+                        <div t-elif="control.type === 'switch'" class="hsd-control form-check form-switch">
+                            <input type="checkbox" class="form-check-input" role="switch"
+                                   t-att-id="'hsd_' + control.key"
+                                   t-att-checked="this.cfg[control.key]"
+                                   t-on-change="(ev) => this.onSwitch(control, ev)"/>
+                            <label class="form-check-label" t-att-for="'hsd_' + control.key" t-out="control.label"/>
+                        </div>
+                        <!-- Segmented choice -->
+                        <div t-elif="control.type === 'segmented'" class="hsd-control">
+                            <div class="hsd-label"><span t-out="control.label"/></div>
+                            <div class="hsd-segmented" role="radiogroup">
+                                <button t-foreach="control.choices" t-as="choice" t-key="choice[0]"
+                                        type="button" role="radio"
+                                        t-att-aria-checked="this.cfg[control.key] === choice[0] ? 'true' : 'false'"
+                                        t-att-class="{ active: this.cfg[control.key] === choice[0] }"
+                                        t-on-click="() => this.onChoice(control, choice[0])"
+                                        t-out="choice[1]"/>
+                            </div>
+                        </div>
+                        <!-- Gradient presets -->
+                        <div t-elif="control.type === 'presets'" class="hsd-control hsd-presets">
+                            <button t-foreach="this.presets" t-as="preset" t-key="preset" type="button"
+                                    t-attf-class="hsd-swatch hsd-swatch-{{ preset }}"
+                                    t-att-class="{ active: this.cfg.bg_preset === preset }"
+                                    t-att-title="this.presetLabel(preset)"
+                                    t-att-aria-label="this.presetLabel(preset)"
+                                    t-on-click="() => this.onChoice(control, preset)"/>
+                        </div>
+                        <!-- Dark mode (saved at once, the page reloads) -->
+                        <div t-elif="control.type === 'scheme'" class="hsd-control">
+                            <div class="hsd-segmented" role="radiogroup">
+                                <button t-foreach="this.schemeChoices" t-as="choice" t-key="choice[0]"
+                                        type="button" role="radio"
+                                        t-att-aria-checked="this.colorScheme === choice[0] ? 'true' : 'false'"
+                                        t-att-class="{ active: this.colorScheme === choice[0] }"
+                                        t-att-disabled="this.state.busy"
+                                        t-on-click="() => this.setScheme(choice[0])"
+                                        t-out="choice[1]"/>
+                            </div>
+                        </div>
+                        <!-- Apps: order (drag and drop) and visibility -->
+                        <div t-elif="control.type === 'apps'" class="hsd-control">
+                            <div class="hsd-hint">Drag to reorder. The eye hides an app from the home screen and the side bar (access rights are unchanged).</div>
+                            <div class="hsd-app-list" t-ref="apps">
+                                <div t-foreach="this.apps" t-as="app" t-key="app.xmlid"
+                                     class="hsd-app-row" t-att-class="{ 'is-hidden': app.hidden }"
+                                     t-att-data-xmlid="app.xmlid">
+                                    <span class="hsd-app-grip" title="Drag to reorder">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                                            <circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/>
+                                            <circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/>
+                                            <circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/>
+                                        </svg>
+                                    </span>
+                                    <img t-if="app.image" class="hsd-app-mini" t-att-src="app.image" alt=""/>
+                                    <span t-else="" class="hsd-app-mini hsd-app-mini-font"
+                                          t-attf-style="background-color: {{ app.background }};">
+                                        <i t-att-class="app.iconClass" t-attf-style="color: {{ app.color }};"/>
+                                    </span>
+                                    <span class="hsd-app-name" t-out="app.name"/>
+                                    <button type="button" class="hsd-app-eye"
+                                            t-att-title="app.hidden ? 'Show' : 'Hide'"
+                                            t-on-click="() => this.toggleApp(app)">
+                                        <svg t-if="!app.hidden" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>
+                                        </svg>
+                                        <svg t-else="" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                            <path d="M3 3l18 18M10.6 5.1A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7c1.8 0 3.3-.5 4.6-1.2M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-link btn-sm px-0" t-on-click="() => this.resetApps()">
+                                Odoo's order, all apps visible
+                            </button>
+                        </div>
+                        <!-- Picture -->
+                        <div t-elif="control.type === 'image'" class="hsd-control">
+                            <div t-if="this.background" class="hsd-bg-preview"
+                                 t-attf-style="background-image: url('{{ this.background }}');"/>
+                            <div class="d-flex gap-2">
+                                <label class="btn btn-secondary btn-sm mb-0">
+                                    <t t-if="this.background">Change picture</t>
+                                    <t t-else="">Upload a picture</t>
+                                    <input type="file" accept="image/*" class="d-none"
+                                           t-on-change="(ev) => this.onFile(ev)"/>
+                                </label>
+                                <button t-if="this.background" type="button" class="btn btn-link btn-sm text-danger"
+                                        t-on-click="() => this.removeBackground()">Remove</button>
+                            </div>
+                        </div>
+                    </t>
+                </section>
+                <section t-if="this.serverState.can_set_company" class="hsd-section">
+                    <h3 class="hsd-section-title">Administration</h3>
+                    <div class="hsd-hint">Colors of the whole interface and icon of the installed app, for every user.</div>
+                    <button type="button" class="btn btn-secondary btn-sm" t-on-click="() => this.openSettings()">
+                        Theme colors &amp; app icon
+                    </button>
+                </section>
+            </div>
+
+            <footer class="hsd-panel-foot">
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-primary flex-grow-1" t-att-disabled="this.state.busy"
+                            t-on-click="() => this.save()">Save</button>
+                    <button type="button" class="btn btn-secondary" t-att-disabled="this.state.busy"
+                            t-on-click="() => this.cancel()">Cancel</button>
+                </div>
+                <button type="button" class="btn btn-link btn-sm hsd-more-toggle"
+                        t-on-click="() => { this.state.more = !this.state.more; }">
+                    More options
+                </button>
+                <div t-if="this.state.more" class="hsd-more">
+                    <button t-if="this.serverState.can_set_company" type="button"
+                            class="btn btn-outline-primary btn-sm" t-att-disabled="this.state.busy"
+                            t-on-click="() => this.saveCompany()">
+                        Save as the company layout
+                    </button>
+                    <button t-if="this.serverState.personal" type="button"
+                            class="btn btn-outline-secondary btn-sm" t-att-disabled="this.state.busy"
+                            t-on-click="() => this.resetUser()">
+                        Use the company layout
+                    </button>
+                    <button t-if="this.serverState.can_set_company" type="button"
+                            class="btn btn-outline-danger btn-sm" t-att-disabled="this.state.busy"
+                            t-on-click="() => this.resetCompany()">
+                        Reset the company layout
+                    </button>
+                </div>
+            </footer>
+        </aside>
+    </t>
+
+    <!-- ============================================================ -->
+    <!-- Side bar of apps                                              -->
+    <!-- ============================================================ -->
+    <t t-name="home_screen_designer.Sidebar">
+        <nav t-if="this.visible" class="o_hsd_sidebar" t-att-class="{ 'is-labels': this.mode === 'labels' }"
+             t-ref="root" aria-label="Apps">
+            <div class="hsd-side-apps">
+                <a t-foreach="this.apps" t-as="app" t-key="app.id"
+                   class="hsd-side-item" t-att-class="{ active: app.active }"
+                   t-att-href="app.href" t-att-title="app.name" t-att-data-menu-xmlid="app.xmlid"
+                   t-on-click="(ev) => this.onClick(ev, app)">
+                    <img t-if="app.image" class="hsd-side-icon" t-att-src="app.image" alt=""/>
+                    <span t-else="" class="hsd-side-icon hsd-side-icon-font"
+                          t-attf-style="background-color: {{ app.background }};">
+                        <i t-att-class="app.iconClass" t-attf-style="color: {{ app.color }};"/>
+                    </span>
+                    <span class="hsd-side-label" t-out="app.name"/>
+                </a>
+            </div>
+        </nav>
+    </t>
+
+    <!-- ============================================================ -->
+    <!-- Refresh button of the views                                   -->
+    <!-- ============================================================ -->
+    <t t-name="home_screen_designer.Refresh">
+        <div class="o_hsd_refresh btn-group d-print-none" role="group">
+            <button type="button" class="btn btn-secondary hsd-refresh-btn"
+                    t-att-class="{ 'is-auto': this.state.interval }"
+                    title="Refresh" aria-label="Refresh"
+                    t-on-click="() => this.onClick()">
+                <svg t-att-class="{ 'hsd-spin': this.state.busy }" viewBox="0 0 24 24" width="15" height="15"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>
+                </svg>
+                <span t-if="this.state.interval" class="hsd-refresh-label" t-out="this.intervalLabel(this.state.interval)"/>
+            </button>
+            <Dropdown>
+                <button type="button" class="btn btn-secondary hsd-refresh-toggle" title="Automatic refresh"
+                        aria-label="Automatic refresh">
+                    <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true">
+                        <path d="M5 8l7 8 7-8z"/>
+                    </svg>
+                </button>
+                <t t-set-slot="content">
+                    <div class="dropdown-header">Automatic refresh</div>
+                    <DropdownItem t-foreach="this.intervals" t-as="seconds" t-key="seconds"
+                                  class="{ 'active': this.state.interval === seconds }"
+                                  onSelected="() => this.setInterval(seconds)">
+                        <t t-out="this.intervalLabel(seconds)"/>
+                    </DropdownItem>
+                </t>
+            </Dropdown>
+        </div>
+    </t>
+
+    <t t-inherit="web.ControlPanel" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_cp_pager')]" position="before">
+            <t t-if="this.hsdRefresh" t-component="this.hsdRefreshComponent"/>
+        </xpath>
+    </t>
+
+    <!-- ============================================================ -->
+    <!-- Community navbar: the apps button opens the home screen       -->
+    <!-- ============================================================ -->
+    <t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_navbar_apps_menu')]" position="attributes">
+            <!-- t-if > t-elif > t-else chain: the original "else" branch
+                 keeps working for scoped apps. -->
+            <attribute name="t-if"/>
+            <attribute name="t-elif">!this.isScopedApp</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_navbar_apps_menu')]" position="before">
+            <div t-if="!this.isScopedApp and this.hsdCommunityHome" class="o_navbar_apps_menu o_hsd_apps_button">
+                <button type="button" class="o-dropdown dropdown-toggle" title="Home Menu" data-hotkey="h"
+                        t-att-class="{ active: this.hsdOnHome }"
+                        t-on-click="() => this.hsdOpenHome()">
+                    <i class="oi oi-apps"/>
+                </button>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,5 @@
+// Home Screen Designer - dark palette, Bootstrap side (dark bundle only).
+// Bootstrap picks the text color of colored components (buttons, badges)
+// between these two colors: keep a real white and a real dark.
+$color-contrast-light: #ffffff !default;
+$color-contrast-dark: #111318 !default;

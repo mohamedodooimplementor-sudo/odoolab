@@ -1,0 +1,982 @@
+// Home Screen Designer
+// =====================================================================
+// The layout is driven by custom properties and classes set on <body> by
+// hsd_store.js. Every rule targets both the Enterprise home menu
+// (.o_home_menu) and the Community home screen of this module (.o_hsd_home),
+// which share the same inner class names.
+
+$hsd-presets: (
+    aurora: (radial-gradient(at 15% 20%, #7f5af0 0, transparent 55%),
+             radial-gradient(at 85% 10%, #2cb67d 0, transparent 50%),
+             radial-gradient(at 75% 85%, #3da9fc 0, transparent 55%),
+             linear-gradient(135deg, #16161a, #242629)),
+    sunset: linear-gradient(135deg, #ff9a8b 0%, #ff6a88 55%, #ff99ac 100%),
+    ocean: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%),
+    forest: linear-gradient(135deg, #134e5e 0%, #71b280 100%),
+    graphite: linear-gradient(135deg, #232526 0%, #414345 100%),
+    lavender: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%),
+    peach: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%),
+    night: radial-gradient(ellipse at top, #1b2735 0%, #090a0f 100%),
+);
+
+$hsd-panel-width: 360px;
+
+@each $name, $gradient in $hsd-presets {
+    body.hsd-preset-#{$name} {
+        --hsd-bg-image: #{$gradient};
+    }
+    .hsd-swatch-#{$name} {
+        background: $gradient;
+    }
+}
+
+body {
+    --hsd-tint-bg: #0d0f14;
+    --hsd-glass-bg: rgba(255, 255, 255, 0.45);
+    --hsd-glass-border: rgba(255, 255, 255, 0.65);
+    --hsd-glass-shadow: 0 8px 24px rgba(15, 23, 42, 0.10);
+}
+body.hsd-tint-dark {
+    --hsd-tint-bg: #0d0f14;
+    --hsd-glass-bg: rgba(255, 255, 255, 0.12);
+    --hsd-glass-border: rgba(255, 255, 255, 0.22);
+    --hsd-glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+body.hsd-tint-light {
+    --hsd-tint-bg: #f4f5f7;
+    --hsd-glass-bg: rgba(255, 255, 255, 0.55);
+    --hsd-glass-border: rgba(255, 255, 255, 0.75);
+}
+
+// ---------------------------------------------------------------------
+// Background
+// ---------------------------------------------------------------------
+.hsd-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--hsd-tint-bg);
+}
+.hsd-backdrop-img {
+    position: absolute;
+    // Blur bleeds transparent edges: enlarge the picture accordingly.
+    inset: calc(-2 * var(--hsd-bg-blur, 0px));
+    background-image: var(--hsd-bg-image, none);
+    background-size: cover;
+    background-position: center;
+    opacity: var(--hsd-bg-opacity, 1);
+    filter: blur(var(--hsd-bg-blur, 0px));
+}
+
+body.hsd-on-home.hsd-has-bg {
+    background: transparent !important;
+
+    .hsd-backdrop {
+        display: block;
+    }
+    .o_action_manager,
+    .o_home_menu,
+    .o_hsd_home {
+        background: transparent !important;
+    }
+}
+
+// Navbar over the background: fully transparent, the picture flows behind
+// it. Odoo paints every entry with the navbar color (purple squares) and
+// writes in white: the entries become transparent and take a text color
+// readable on the overlay (dark on a light one, white on a dark one).
+body.hsd-on-home.hsd-has-bg {
+    --hsd-nav-fg: #1f2328;
+    --hsd-nav-hover: rgba(255, 255, 255, 0.45);
+}
+body.hsd-on-home.hsd-has-bg.hsd-tint-dark {
+    --hsd-nav-fg: #ffffff;
+    --hsd-nav-hover: rgba(255, 255, 255, 0.16);
+}
+// Flat navbar: entries without Odoo's colored background, text in
+// var(--hsd-nav-fg), soft highlight var(--hsd-nav-hover).
+@mixin hsd-flat-navbar {
+    color: var(--hsd-nav-fg) !important;
+    --NavBar-entry-color: var(--hsd-nav-fg);
+    --NavBar-entry-color--hover: var(--hsd-nav-fg);
+    --NavBar-entry-backgroundColor: transparent;
+    --NavBar-entry-backgroundColor--hover: var(--hsd-nav-hover);
+    --NavBar-entry-backgroundColor--active: var(--hsd-nav-hover);
+
+    .o_menu_systray,
+    .o_menu_systray .bg-inherit {
+        background: transparent !important;
+    }
+    .o_menu_systray > div > button,
+    .o_menu_systray > div > div > button,
+    .o_menu_systray .o-dropdown.dropdown-toggle,
+    .o_navbar_apps_menu button,
+    .o_menu_toggle,
+    .o_menu_brand,
+    .o_menu_sections .o_nav_entry,
+    .o_menu_sections .dropdown-toggle,
+    .o_menu_sections_more .dropdown-toggle {
+        background: transparent !important;
+        color: var(--hsd-nav-fg) !important;
+        border-radius: 8px;
+        transition: background-color 0.15s ease;
+
+        &:hover,
+        &:focus-visible,
+        &.show,
+        &.active {
+            background: var(--hsd-nav-hover) !important;
+        }
+    }
+    // Counters keep standing out from the background.
+    .o_menu_systray .o-mail-MessagingMenuInDropdown-counter,
+    .o_menu_systray .badge {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+    }
+    .oe_topbar_name {
+        color: var(--hsd-nav-fg) !important;
+    }
+}
+
+// Home screen with a background: transparent bar, the picture flows behind.
+body.hsd-on-home.hsd-has-bg .o_main_navbar {
+    background: transparent !important;
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+    @include hsd-flat-navbar;
+}
+
+// Inside the apps, "blended" style: the bar takes the color of the views
+// (white, or dark in dark mode) with a thin separator.
+body.hsd-navbar-surface:not(.hsd-on-home) {
+    --hsd-nav-fg: #{$o-main-text-color};
+    --hsd-nav-hover: #{rgba($o-gray-900, 0.07)};
+
+    .o_main_navbar {
+        background: $o-view-background-color !important;
+        border-bottom: 1px solid $border-color !important;
+        box-shadow: none !important;
+        @include hsd-flat-navbar;
+
+        .o_menu_brand {
+            font-weight: 600;
+        }
+    }
+}
+// Same for the home screen without background.
+body.hsd-navbar-surface.hsd-on-home:not(.hsd-has-bg) {
+    --hsd-nav-fg: #{$o-main-text-color};
+    --hsd-nav-hover: #{rgba($o-gray-900, 0.07)};
+
+    .o_main_navbar {
+        background: transparent !important;
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
+        @include hsd-flat-navbar;
+    }
+}
+
+// ---------------------------------------------------------------------
+// Grid and icons (Enterprise + Community)
+// ---------------------------------------------------------------------
+.o_home_menu .container,
+.o_hsd_home .hsd-inner {
+    // Interpolated: libsass would try to evaluate min() itself.
+    max-width: #{"min(100%, var(--hsd-max-w, 960px))"} !important;
+}
+
+.o_home_menu .o_apps,
+.o_hsd_home .o_apps {
+    display: grid !important;
+    grid-template-columns: repeat(var(--hsd-cols, 6), minmax(0, 1fr));
+    gap: var(--hsd-gap, 16px);
+    align-items: start;
+
+    > * {
+        width: auto !important;
+        max-width: none !important;
+        flex: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+body.hsd-fit {
+    .o_home_menu .o_apps,
+    .o_hsd_home .o_apps {
+        grid-template-columns: repeat(auto-fill, minmax(var(--hsd-tile, 112px), 1fr));
+    }
+}
+
+// Phones: never squeeze the icons, as many columns as they fit.
+@media (max-width: 767.98px) {
+    .o_home_menu .o_apps,
+    .o_hsd_home .o_apps {
+        grid-template-columns: repeat(auto-fill, minmax(#{"min(var(--hsd-tile, 112px), 22vw)"}, 1fr)) !important;
+        gap: #{"min(var(--hsd-gap, 16px), 10px)"} !important;
+    }
+    // (icon size on phones: see the end of the file, after the base rules)
+}
+
+.o_home_menu .o_app,
+.o_hsd_home .o_app {
+    .o_app_icon {
+        width: var(--hsd-icon, 64px) !important;
+        height: var(--hsd-icon, 64px) !important;
+        max-width: none;
+        border-radius: var(--hsd-radius, 14px) !important;
+        transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease, filter 0.2s ease;
+    }
+    .o_caption {
+        font-size: var(--hsd-font, 13px);
+    }
+}
+
+// Enterprise draws each icon on a tile (white background, padding, inset
+// border and shadow, also on hover): show the icon itself, as in Community.
+// "body" outranks web_enterprise, whose stylesheet may load after this one.
+body .o_home_menu .o_app .o_app_icon {
+    --AppSwitcherIcon-background: transparent;
+    --AppSwitcherIcon-box-shadow: none;
+    --AppSwitcherIcon-box-shadow--hover: none;
+    --AppSwitcherIcon-inset-shadow: none;
+    background-color: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: var(--hsd-radius, 14px) !important;
+}
+
+body.hsd-no-captions {
+    .o_home_menu .o_caption,
+    .o_hsd_home .o_caption {
+        display: none !important;
+    }
+}
+body.hsd-caption-light {
+    .o_home_menu .o_caption,
+    .o_hsd_home .o_caption,
+    .hsd-header {
+        color: #fff !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+    }
+}
+body.hsd-caption-dark {
+    .o_home_menu .o_caption,
+    .o_hsd_home .o_caption,
+    .hsd-header {
+        color: #1f2328 !important;
+        text-shadow: none;
+    }
+}
+
+// Glass tiles
+body.hsd-glass {
+    .o_home_menu .o_app,
+    .o_hsd_home .o_app {
+        background: var(--hsd-glass-bg);
+        border: 1px solid var(--hsd-glass-border);
+        border-radius: calc(var(--hsd-radius, 14px) + 10px) !important;
+        box-shadow: var(--hsd-glass-shadow);
+        backdrop-filter: blur(var(--hsd-glass-blur, 14px)) saturate(160%);
+        -webkit-backdrop-filter: blur(var(--hsd-glass-blur, 14px)) saturate(160%);
+        padding: 14px 8px 10px !important;
+    }
+}
+
+// Entrance animation (each icon slightly after the previous one)
+@keyframes hsd-pop {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+body.hsd-anim-in {
+    .o_home_menu .o_apps > *,
+    .o_hsd_home .o_apps > * {
+        // "backwards": the end state is released, so that dragging an app
+        // (Enterprise) still moves it.
+        animation: hsd-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+        animation-delay: calc(var(--hsd-i, 0) * 28ms);
+    }
+}
+@for $i from 1 through 40 {
+    .o_home_menu .o_apps > :nth-child(#{$i}) {
+        --hsd-i: #{$i - 1};
+    }
+}
+
+// Hover effects
+@keyframes hsd-bounce {
+    0%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-10px); }
+    50% { transform: translateY(0); }
+    70% { transform: translateY(-4px); }
+}
+body.hsd-hover-lift {
+    .o_home_menu .o_app:hover .o_app_icon,
+    .o_hsd_home .o_app:hover .o_app_icon {
+        transform: translateY(-5px) !important;
+    }
+    .o_hsd_home .o_app:hover img.o_app_icon {
+        filter: drop-shadow(0 10px 14px rgba(15, 23, 42, 0.24));
+    }
+}
+body.hsd-hover-grow {
+    .o_home_menu .o_app:hover .o_app_icon,
+    .o_hsd_home .o_app:hover .o_app_icon {
+        transform: scale(1.1) !important;
+    }
+}
+body.hsd-hover-bounce {
+    .o_home_menu .o_app:hover .o_app_icon,
+    .o_hsd_home .o_app:hover .o_app_icon {
+        animation: hsd-bounce 0.6s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .o_home_menu .o_apps > *,
+    .o_hsd_home .o_apps > *,
+    .o_home_menu .o_app_icon,
+    .o_hsd_home .o_app_icon {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+// ---------------------------------------------------------------------
+// Greeting and clock
+// ---------------------------------------------------------------------
+.hsd-header {
+    text-align: center;
+    padding: 28px 16px 4px;
+}
+.hsd-clock {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+.hsd-date {
+    margin-top: 8px;
+    font-size: 15px;
+    opacity: 0.8;
+    text-transform: capitalize;
+}
+.hsd-greeting {
+    margin-top: 12px;
+    font-size: clamp(18px, 2.2vw, 26px);
+    font-weight: 500;
+}
+
+// Enterprise: the header floats above the home menu, which keeps room for it
+// and fades the apps scrolled beneath.
+.hsd-native-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+body.hsd-on-home.hsd-has-header .o_home_menu {
+    padding-top: var(--hsd-header-h, 0px);
+    mask-image: linear-gradient(to bottom, transparent 0,
+        transparent calc(var(--hsd-header-h, 0px) - 24px), #000 var(--hsd-header-h, 0px));
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0,
+        transparent calc(var(--hsd-header-h, 0px) - 24px), #000 var(--hsd-header-h, 0px));
+}
+
+// Search bar above the apps (Community home screen and Enterprise home menu)
+.o_hsd_home,
+.hsd-native-header {
+    .hsd-search {
+        position: relative;
+        width: calc(100% - 32px);
+        max-width: 520px;
+        margin: 24px auto 8px;
+    }
+    .hsd-search-icon {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        width: 18px;
+        height: 18px;
+        transform: translateY(-50%);
+        opacity: 0.55;
+        pointer-events: none;
+    }
+    .hsd-search-input {
+        width: 100%;
+        padding: 10px 18px 10px 44px;
+        border: 1px solid var(--bs-border-color, #d8dadd);
+        border-radius: 999px;
+        background: var(--bs-body-bg, #fff);
+        color: inherit;
+        font-size: 15px;
+        outline: none;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+
+        &:focus {
+            border-color: var(--bs-primary, #714b67);
+            box-shadow: 0 0 0 3px rgba(113, 75, 103, 0.18);
+        }
+    }
+}
+.hsd-native-header .hsd-search {
+    pointer-events: auto; // the header itself lets the clicks through
+    margin-top: 16px;
+}
+// Enterprise shows its own search field on touch screens only: ours replaces
+// it. The hidden one stays, it still catches what is typed on the home menu.
+body.hsd-native-search .o_home_menu > input[type="text"]:not(.visually-hidden) {
+    display: none !important;
+}
+
+// ---------------------------------------------------------------------
+// Community home screen
+// ---------------------------------------------------------------------
+.o_hsd_home {
+    height: 100%;
+    overflow: auto;
+    color: var(--bs-body-color, #1f2328);
+
+    .hsd-inner {
+        margin: 0 auto;
+        padding: 8px 16px 64px;
+    }
+
+    .o_apps {
+        margin-top: 28px;
+    }
+    .o_app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 6px;
+        border-radius: 14px;
+        color: inherit;
+        text-decoration: none;
+        outline: none;
+
+        &:focus-visible,
+        &.o_focused {
+            box-shadow: 0 0 0 2px var(--bs-primary, #714b67);
+        }
+    }
+    // Odoo's app icons are transparent pictures: no tile behind them, the
+    // shadow follows the shape of the icon.
+    img.o_app_icon {
+        object-fit: contain;
+        background: transparent;
+        filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.16));
+    }
+    .hsd-font-icon {
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.14);
+    }
+    .hsd-font-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+            font-size: calc(var(--hsd-icon, 64px) * 0.5);
+        }
+    }
+    .o_caption {
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.3;
+    }
+
+    .hsd-menu-results {
+        max-width: 640px;
+        margin: 28px auto 0;
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--bs-body-bg, #fff);
+        border: 1px solid var(--bs-border-color, #d8dadd);
+    }
+    .hsd-menu-result {
+        display: block;
+        padding: 10px 16px;
+        color: var(--bs-body-color, #1f2328);
+        text-decoration: none;
+
+        & + .hsd-menu-result {
+            border-top: 1px solid var(--bs-border-color, #eceef0);
+        }
+        &:hover,
+        &.o_focused {
+            background: var(--bs-tertiary-bg, #f3f4f6);
+        }
+    }
+    .hsd-menu-parents {
+        margin-right: 6px;
+        opacity: 0.6;
+    }
+    .hsd-no-result {
+        margin-top: 32px;
+        text-align: center;
+        opacity: 0.7;
+    }
+}
+
+body.hsd-has-bg .o_hsd_home .hsd-search-input,
+body.hsd-has-bg .hsd-native-header .hsd-search-input {
+    background: var(--hsd-glass-bg);
+    border-color: var(--hsd-glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+body.hsd-has-bg.hsd-tint-dark .o_hsd_home .hsd-search-input,
+body.hsd-has-bg.hsd-tint-dark .hsd-native-header .hsd-search-input {
+    color: #fff;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+body.hsd-has-bg.hsd-tint-dark .o_hsd_home .hsd-search-icon,
+body.hsd-has-bg.hsd-tint-dark .hsd-native-header .hsd-search-icon {
+    color: #fff;
+}
+
+// ---------------------------------------------------------------------
+// Top bar button
+// ---------------------------------------------------------------------
+.o_hsd_systray_btn {
+    display: flex;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    color: inherit;
+
+    &.active {
+        color: var(--bs-primary, #714b67);
+    }
+    &::after {
+        display: none !important; // no dropdown caret
+    }
+}
+.o_hsd_apps_button button::after {
+    display: none !important;
+}
+body.hsd-on-home .o_hsd_apps_button {
+    display: none !important; // already on the home screen
+}
+
+// ---------------------------------------------------------------------
+// Designer panel
+// ---------------------------------------------------------------------
+@keyframes hsd-slide-in {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: none;
+    }
+}
+
+.o_hsd_panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+    width: $hsd-panel-width;
+    max-width: 100vw;
+    background: var(--bs-body-bg, #fff);
+    color: var(--bs-body-color, #1f2328);
+    border-left: 1px solid var(--bs-border-color, #e3e5e8);
+    box-shadow: -16px 0 40px rgba(15, 23, 42, 0.16);
+    animation: hsd-slide-in 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    .hsd-panel-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid var(--bs-border-color, #e3e5e8);
+    }
+    .hsd-panel-title {
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .hsd-panel-status {
+        margin-top: 2px;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+
+    .hsd-panel-body {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding: 4px 20px 16px;
+    }
+    .hsd-section {
+        padding: 14px 0 6px;
+
+        & + .hsd-section {
+            border-top: 1px solid var(--bs-border-color, #eceef0);
+        }
+    }
+    .hsd-section-title {
+        margin: 0 0 10px;
+        color: inherit;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.6;
+    }
+    .hsd-control {
+        margin-bottom: 14px;
+    }
+    .hsd-control.form-switch {
+        padding-left: 2.6em;
+    }
+    .hsd-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+        font-size: 13px;
+    }
+    .hsd-value {
+        font-variant-numeric: tabular-nums;
+        opacity: 0.7;
+    }
+
+    .hsd-segmented {
+        display: flex;
+        padding: 3px;
+        border-radius: 10px;
+        background: var(--bs-tertiary-bg, #f1f2f4);
+
+        button {
+            flex: 1 1 0;
+            padding: 5px 4px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: inherit;
+            font-size: 12.5px;
+            white-space: nowrap;
+
+            &.active {
+                background: var(--bs-body-bg, #fff);
+                box-shadow: 0 1px 3px rgba(15, 23, 42, 0.15);
+                font-weight: 600;
+            }
+        }
+    }
+
+    .hsd-presets {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+    .hsd-swatch {
+        aspect-ratio: 16 / 10;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+
+        &.active {
+            border-color: var(--bs-primary, #714b67);
+            box-shadow: 0 0 0 2px var(--bs-body-bg, #fff) inset;
+        }
+    }
+    .hsd-bg-preview {
+        aspect-ratio: 16 / 9;
+        margin-bottom: 8px;
+        border-radius: 10px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    }
+
+    .hsd-panel-foot {
+        padding: 14px 20px 16px;
+        border-top: 1px solid var(--bs-border-color, #e3e5e8);
+    }
+    .hsd-more-toggle {
+        padding-left: 0;
+        margin-top: 6px;
+    }
+    .hsd-more {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+// Wide screens: the home screen makes room for the panel, so that the whole
+// result stays visible while editing.
+@media (min-width: 1200px) {
+    body.hsd-panel-open.hsd-on-home .o_action_manager {
+        margin-right: $hsd-panel-width;
+    }
+}
+
+// ---------------------------------------------------------------------
+// Apps list of the panel (order and visibility)
+// ---------------------------------------------------------------------
+.o_hsd_panel {
+    .hsd-hint {
+        margin-bottom: 8px;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+    .hsd-app-list {
+        max-height: 320px;
+        overflow-y: auto;
+        border: 1px solid var(--bs-border-color, #e3e5e8);
+        border-radius: 10px;
+    }
+    .hsd-app-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 8px;
+        background: var(--bs-body-bg, #fff);
+
+        & + .hsd-app-row {
+            border-top: 1px solid var(--bs-border-color, #eceef0);
+        }
+        &.is-hidden .hsd-app-mini,
+        &.is-hidden .hsd-app-name {
+            opacity: 0.35;
+        }
+    }
+    .hsd-app-row-placeholder {
+        background: var(--bs-tertiary-bg, #f1f2f4);
+    }
+    .hsd-app-grip {
+        cursor: grab;
+        opacity: 0.45;
+    }
+    .hsd-app-mini {
+        flex: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+    .hsd-app-mini-font {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+    }
+    .hsd-app-name {
+        flex: 1 1 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 13px;
+    }
+    .hsd-app-eye {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+// Community home: icons being arranged while the panel is open.
+body.hsd-panel-open .o_hsd_home .hsd-app-cell {
+    cursor: grab;
+}
+.o_hsd_home .hsd-app-placeholder {
+    opacity: 0.35;
+}
+
+// ---------------------------------------------------------------------
+// Side bar of apps
+// ---------------------------------------------------------------------
+$hsd-sidebar-bg: mix($o-brand-odoo, #101114, 22%);
+
+.o_hsd_sidebar {
+    position: fixed;
+    left: var(--hsd-sidebar-left, 0px);
+    bottom: 0;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    width: 56px;
+    padding: 8px 0;
+    background: $hsd-sidebar-bg;
+    color: rgba(255, 255, 255, 0.85);
+    overflow: hidden;
+
+    &.is-labels {
+        width: 190px;
+    }
+
+    .hsd-side-apps {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        // Still scrolls with the wheel, the touchpad or a finger, without a
+        // visible scrollbar.
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .hsd-side-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 2px 8px;
+        padding: 5px;
+        border-radius: 10px;
+        color: inherit;
+        text-decoration: none;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.10);
+            color: #fff;
+        }
+        &.active {
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: -8px;
+                top: 8px;
+                bottom: 8px;
+                width: 3px;
+                border-radius: 0 3px 3px 0;
+                background: $o-brand-primary;
+            }
+        }
+    }
+    .hsd-side-icon {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+    .hsd-side-icon-font {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hsd-side-icon-font {
+        font-size: 15px;
+    }
+    .hsd-side-label {
+        display: none;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 13px;
+    }
+    &.is-labels .hsd-side-label {
+        display: block;
+    }
+}
+
+// "Blended" style: the side bar takes the color of the views too.
+body.hsd-navbar-surface .o_hsd_sidebar {
+    background: $o-view-background-color;
+    color: $o-main-text-color;
+    border-right: 1px solid $border-color;
+
+    .hsd-side-item {
+        &:hover {
+            background: rgba($o-gray-900, 0.07);
+            color: $o-main-text-color;
+        }
+        &.active {
+            background: rgba($o-brand-primary, 0.14);
+            color: $o-main-text-color;
+        }
+    }
+}
+
+// The apps make room for the bar (it is hidden on the home screen).
+body.hsd-sidebar-on .o_action_manager {
+    margin-left: calc(var(--hsd-content-margin, 0px) + var(--hsd-sidebar-w, 56px)) !important;
+}
+
+// ---------------------------------------------------------------------
+// Refresh button of the views
+// ---------------------------------------------------------------------
+@keyframes hsd-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.o_hsd_refresh {
+    align-self: stretch;
+
+    .hsd-refresh-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        &.is-auto {
+            color: $o-brand-primary;
+        }
+    }
+    .hsd-refresh-label {
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+    }
+    .hsd-refresh-toggle {
+        display: flex;
+        align-items: center;
+        padding-left: 6px;
+        padding-right: 6px;
+
+        &::after {
+            display: none; // own caret
+        }
+    }
+    .hsd-spin {
+        animation: hsd-spin 0.8s linear infinite;
+    }
+}
+
+// Phones: icons capped to the screen width (after the base rules to win).
+@media (max-width: 767.98px) {
+    .o_home_menu .o_app .o_app_icon,
+    .o_hsd_home .o_app .o_app_icon {
+        width: #{"min(var(--hsd-icon, 64px), 15vw)"} !important;
+        height: #{"min(var(--hsd-icon, 64px), 15vw)"} !important;
+    }
+    body.hsd-glass {
+        .o_home_menu .o_app,
+        .o_hsd_home .o_app {
+            padding: 10px 4px 8px !important;
+        }
+    }
+}

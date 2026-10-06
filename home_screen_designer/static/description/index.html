@@ -1,0 +1,1136 @@
+<!--
+    HOME SCREEN DESIGNER - Odoo Apps Store description page
+    ========================================================
+
+    HOW THIS FILE IS ORGANIZED
+      1. HERO: big image + one-line pitch in English and French (always visible).
+      2. TAB BAR: English | Francais | Changelog | Support.
+      3. TAB CONTENTS: one <div class="tab-pane"> per tab, in the same order.
+         Each presentation tab contains numbered blocks (1. Manifesto ... 13. Call to action).
+
+    EDITING RULES (the Apps Store cleans this page, respect these rules)
+      - Write accents and symbols as HTML entities, never as raw characters:
+          e acute = &eacute;   e grave = &egrave;   e circ = &ecirc;   a grave = &agrave;
+          c cedil = &ccedil;   o circ = &ocirc;     i circ = &icirc;   u circ = &ucirc;
+          E acute = &Eacute;   A grave = &Agrave;   C cedil = &Ccedil;
+          << = &laquo;   >> = &raquo;   ... = &hellip;   middle dot = &middot;   arrow = &rarr;
+      - Only inline style="" attributes work (no <style> tag, no CSS file, no JavaScript).
+      - Forbidden styles (removed by Odoo): background with gradients, box-shadow,
+        border-left / border-right shorthands (use border-left-width, border-left-style,
+        border-left-color instead), flex properties (use Bootstrap class="row" / "col-md-6").
+      - Images: put the PNG in static/description/ and use <img src="name.png"/>.
+      - No long dashes in texts.
+
+    IMAGES
+      Screenshots taken on a real Odoo 20 database (same interface as Odoo 19) with demo data, framed by
+      HTML pages rendered by a headless browser (sources kept outside the module).
+
+    ADD A CHANGELOG ENTRY
+      Copy one "Version ..." block inside the Changelog tab, paste it ABOVE the
+      previous one, then change the version number, the date and the <li> lines.
+-->
+
+<section class="oe_container" style="padding: 24px 12px 40px;">
+<div class="oe_row" style="max-width: 1160px; margin: 0 auto;">
+
+    <!-- ===================================================================
+         HERO (always visible)
+         =================================================================== -->
+    <div style="background-color: #fbfaff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 12px; margin: 0 0 20px;">
+        <img src="cover.png" alt="Home Screen Designer for Odoo 19" style="width: 100%; border-radius: 20px;"/>
+        <table style="width: 100%; margin: 20px 0 8px;"><tr>
+            <td style="width: 50%; vertical-align: top; padding: 0 20px;">
+                <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #6d28d9; margin: 0 0 6px;">EN</p>
+                <p style="font-size: 16px; line-height: 1.6; color: #3d4052; margin: 0;">A beautiful home screen, dark mode, an apps bar, your brand colors, your app icon and an automatic refresh. For Odoo Community and Enterprise, set up live in a few clicks.</p>
+            </td>
+            <td style="width: 50%; vertical-align: top; padding: 0 20px; border-left-width: 1px; border-left-style: solid; border-left-color: #e3e1f5;">
+                <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #0d9488; margin: 0 0 6px;">FR</p>
+                <p style="font-size: 16px; line-height: 1.6; color: #3d4052; margin: 0;">Un &eacute;cran d'accueil soign&eacute;, le mode sombre, une barre d'applications, les couleurs de votre marque, votre ic&ocirc;ne d'application et l'actualisation automatique. Pour Odoo Community et Enterprise, r&eacute;gl&eacute; en direct en quelques clics.</p>
+            </td>
+        </tr></table>
+    </div>
+
+    <!-- ===================================================================
+         ENTERPRISE COMPATIBILITY (answers the generic warning the Store shows on every backend theme)
+         =================================================================== -->
+    <div style="background-color: #ecfdf5; border: 1px solid #bbe7d3; border-radius: 22px; padding: 22px 26px; margin: 0 0 20px;">
+        <table style="width: 100%;"><tr>
+            <td style="width: 50%; vertical-align: top; padding: 0 14px 0 0;">
+                <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #047857; margin: 0 0 6px;">&#10003;&nbsp; WORKS WITH ODOO ENTERPRISE</p>
+                <p style="font-size: 14px; line-height: 1.6; color: #2f5a4b; margin: 0;">The Store shows a warning on every backend theme. Home Screen Designer is made for both editions: on Enterprise it customizes the native home menu and uses Odoo's own dark mode, it does not replace the web client. On Community it adds its own home screen.</p>
+            </td>
+            <td style="width: 50%; vertical-align: top; padding: 0 0 0 14px; border-left-width: 1px; border-left-style: solid; border-left-color: #bbe7d3;">
+                <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #047857; margin: 0 0 6px;">&#10003;&nbsp; COMPATIBLE AVEC ODOO ENTERPRISE</p>
+                <p style="font-size: 14px; line-height: 1.6; color: #2f5a4b; margin: 0;">Le Store affiche un avertissement sur tous les th&egrave;mes backend. Home Screen Designer est pens&eacute; pour les deux &eacute;ditions : sur Enterprise, il personnalise le menu d'accueil natif et utilise le mode sombre d'Odoo, sans remplacer le client web. Sur Community, il ajoute son propre &eacute;cran d'accueil.</p>
+            </td>
+        </tr></table>
+    </div>
+    <!-- ===================================================================
+         TAB BAR (the href="#..." must match the id of a tab-pane below)
+         =================================================================== -->
+    <ul class="nav nav-pills nav-fill" role="tablist" style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 6px; margin: 0 0 20px;">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" data-bs-toggle="tab" href="#hsd-en" role="tab" aria-controls="hsd-en" aria-selected="true" style="font-size: 16px; font-weight: 700; border-radius: 14px; padding: 12px 8px;">English</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#hsd-fr" role="tab" aria-controls="hsd-fr" aria-selected="false" style="font-size: 16px; font-weight: 700; border-radius: 14px; padding: 12px 8px;">Fran&ccedil;ais</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#hsd-changelog" role="tab" aria-controls="hsd-changelog" aria-selected="false" style="font-size: 16px; font-weight: 700; border-radius: 14px; padding: 12px 8px;">Changelog</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#hsd-support" role="tab" aria-controls="hsd-support" aria-selected="false" style="font-size: 16px; font-weight: 700; border-radius: 14px; padding: 12px 8px;">Support</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- ===================================================================
+             TAB: ENGLISH
+             =================================================================== -->
+        <div class="tab-pane fade show active" id="hsd-en" role="tabpanel">
+
+            <!-- 1. Manifesto and key numbers -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <h2 style="font-size: 44px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Your team opens Odoo every morning.<br/>Make it a place they <span style="color: #6d28d9;">like</span>.</h2>
+                <p style="font-size: 18px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 36px;">Home Screen Designer turns Odoo's plain list of icons into a real home screen: clock, greeting, search, beautiful backgrounds and glass tiles. Then it goes further, inside every app: dark mode, an apps bar, your brand colors, your own app icon on phones and computers, and a refresh button that keeps your pipelines up to date by itself. Everything is set live, from a side panel, without a single line of code.</p>
+                <div class="row">
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #6d28d9; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">28</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">layout settings, previewed live</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #0d9488; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">8</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">gradients, or your own picture</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #db2777; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">10</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">theme colors, light and dark</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #d97706; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">2</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">editions: Community and Enterprise</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. The home screen -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #6d28d9; margin: 0 0 10px;">THE HOME SCREEN</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">A home screen worthy of the name</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">A large clock with the date, a personal &quot;Good morning&quot; greeting, a search bar that finds the apps <strong>and their menus</strong> as you type, and the app grid on a background of your choice. On Odoo Community, the module adds this full screen home screen, opened after login and from the apps button. On Odoo Enterprise, it dresses up the native <strong>Enterprise home menu</strong>.</p>
+                <img src="hero.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 3. The live designer -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #0369a1; margin: 0 0 10px;">THE LIVE DESIGNER</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Move a slider, see the result. Instantly.</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">One click on the designer icon of the top bar opens a side panel. Every change is applied behind it as you make it, before you even save. <strong>Save</strong> keeps it, <strong>Cancel</strong> puts everything back as it was.</p>
+                <img src="designer.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 28px;"/>
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Layout</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">3 to 12 columns, or fit the grid to the screen width. Spacing between the apps from 0 to 48 px.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Icons</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Size from 32 to 128 px, corner radius from square to round, text size, names shown or hidden, text color automatic, light or dark.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Background</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Odoo's default, one of 8 gradients or your own picture, with visibility, light or dark overlay and blur.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Effects</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Glass tiles (glassmorphism) with adjustable blur, entrance animation, hover effect: lift, bounce or grow.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Greeting &amp; clock</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Personal greeting with the first name, clock with or without seconds, date. Each one can be turned off.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Behavior</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Search bar on the apps and menus, home screen opened after login: on or off, as you like.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Backgrounds -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #db2777; margin: 0 0 10px;">BACKGROUNDS</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Eight moods. Or your own picture.</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Eight hand-tuned gradients, light or dark. Prefer your office, your products or your brand? Upload any picture: it is resized by the browser before being sent, and the overlay keeps the texts readable on any image.</p>
+                <img src="presets.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 5. Apps order -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #b45309; margin: 0 0 10px;">APPS ORDER</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Your apps, in your order</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Drag and drop the apps to put the ones you use every day first. One click on the eye hides an app you never open, from the home screen and from the apps bar. Hiding is only a matter of display: access rights do not change, and the app stays reachable from its links. One more click brings back Odoo's order.</p>
+                <img src="apps.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 6. Apps bar and top bar -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #15803d; margin: 0 0 10px;">INSIDE THE APPS</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">From CRM to Invoicing in one click</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">An <strong>apps bar</strong> on the left of every app: icons only, or icons and names. The current app is highlighted, the order and hidden apps follow your home screen. The <strong>top bar</strong> can keep your brand color, or blend with the page for a clean, modern look, in light and in dark mode. The bar steps aside on phones.</p>
+                <img src="appsbar.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 7. Dark mode -->
+            <div style="background-color: #17181c; border: 1px solid #2e3140; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #2dd4bf; margin: 0 0 10px;">DARK MODE</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #ffffff; margin: 0 0 16px;">The dark mode, now on Community too</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #b8bccb; max-width: 820px; margin: 0 0 28px;">Odoo Community has no dark theme: Home Screen Designer brings a complete dark palette, built on Odoo's own styles, for every view and every app. Each user picks <strong style="color: #ffffff;">Light</strong>, <strong style="color: #ffffff;">Dark</strong> or <strong style="color: #ffffff;">System</strong> (follows the computer or phone setting), from the user menu or from the panel. On Odoo Enterprise, the native dark mode is used and simply respected.</p>
+                <img src="light_dark.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 20px;"/>
+                <img src="dark_list.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 8. Theme colors and app icon -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #be185d; margin: 0 0 10px;">YOUR BRAND</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Your colors everywhere. Your icon on every phone.</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">In the settings, pick your brand color, the primary color of the buttons and links, the top bar color, and the success, info, warning and danger colors. They are <strong>compiled into Odoo's own styles</strong>, not painted over them: every button, badge, link and progress bar follows, in every app. Brand, primary and top bar colors can get their own shade in dark mode. One click resets Odoo's palette.</p>
+                <img src="settings.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 28px;"/>
+                <table style="width: 100%;"><tr>
+                    <td style="width: 64px; vertical-align: top;"><img src="ic_pwa.png" alt="" style="width: 48px; height: 48px;"/></td>
+                    <td style="vertical-align: top;">
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Installable app: your icon, not Odoo's</h4>
+                        <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 0;">Odoo can be installed as an app on Android, iPhone, Windows, macOS and ChromeOS. Upload your logo: it becomes the icon of the installed app, in every size the devices ask for (iPhone home screen included). Choose the color of the window title bar and of the splash screen too.</p>
+                    </td>
+                </tr></table>
+            </div>
+
+            <!-- 9. Refresh -->
+            <div style="background-color: #f0fdfa; border: 1px solid #c8efe7; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #0f766e; margin: 0 0 10px;">AUTOMATIC REFRESH</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Data that stays fresh, by itself</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">A refresh button in every list, kanban, calendar, graph, pivot or form view reloads the data without reloading the page. Its menu turns on an <strong>automatic refresh</strong>: every 15 or 30 seconds, every 1, 2, 5, 10 or 30 minutes. Perfect for a helpdesk queue, a shop floor or a sales pipeline on the office TV. Each view remembers its own interval.</p>
+                <img src="refresh.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 28px;"/>
+                <div style="background-color: #ffffff; border: 1px solid #c8efe7; border-radius: 18px; padding: 22px 26px;">
+                    <h4 style="font-size: 17px; font-weight: 800; color: #0f3d36; margin: 0 0 8px;">Smart: it never gets in your way</h4>
+                    <p style="font-size: 14px; line-height: 1.7; color: #3d6b62; margin: 0;">The automatic refresh pauses while the browser tab is hidden, while a dialog is open, while a list row is being edited or records are selected, and while a form has unsaved changes. No lost input, no lost selection, no useless load on the server.</p>
+                </div>
+            </div>
+
+            <!-- 10. Everything included (feature list with icons) -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #6d28d9; margin: 0 0 10px;">EVERYTHING INCLUDED</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">One module instead of five</h2>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_home.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">01</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Home screen</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Clock, date, greeting, search on apps and menus, app grid. Full screen on Community, native menu on Enterprise.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_designer.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">02</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Live designer</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Layout, icons, backgrounds, glass, animations, header: previewed as you go, saved or cancelled in one click.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_order.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">03</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Apps order</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Drag and drop to reorder, one click to hide an app from the home screen and the apps bar.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_bar.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">04</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Apps bar &amp; top bar</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Side bar of apps (icons, or icons and names), top bar in your brand color or blended with the page.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_dark.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">05</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Dark mode</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Light, dark or system, per user. A full dark palette for Community, the native one on Enterprise.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_colors.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">06</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Theme colors</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Brand, primary, top bar and status colors compiled into Odoo's styles, with dark mode variants.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_pwa.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">07</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">App icon</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Your logo as the icon of Odoo installed on phones and computers, with title bar and splash colors.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_refresh.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">08</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Refresh &amp; auto refresh</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">A refresh button in the views, and an automatic refresh from 15 seconds to 30 minutes that pauses when needed.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_user.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">09</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Personal layouts</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Each user designs their own home screen. It never changes what the others see.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_company.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">10</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Company layout</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Administrators save a layout for the whole company, used by everyone who has not made their own.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Personal and company layouts -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #4338ca; margin: 0 0 10px;">FOR EVERYONE, FOR THE COMPANY</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Freedom for users, consistency for the company</h2>
+                <div class="row" style="margin-top: 24px;">
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div style="font-size: 72px; font-weight: 800; line-height: 1; color: #e4dcff;">1</div>
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 8px 0;">The administrator sets the tone</h4>
+                        <p style="font-size: 15px; line-height: 1.6; color: #4b4d63; margin: 0;">Design the home screen once and click &quot;Save as the company layout&quot;: every user gets it. Theme colors and app icon are set in the settings.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div style="font-size: 72px; font-weight: 800; line-height: 1; color: #e4dcff;">2</div>
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 8px 0;">Users make it theirs</h4>
+                        <p style="font-size: 15px; line-height: 1.6; color: #4b4d63; margin: 0;">Each user can change their own layout, apps order, apps bar and dark mode. Only for themselves.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div style="font-size: 72px; font-weight: 800; line-height: 1; color: #e4dcff;">3</div>
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 8px 0;">One click back</h4>
+                        <p style="font-size: 15px; line-height: 1.6; color: #4b4d63; margin: 0;">&quot;Use the company layout&quot; brings a user back to the common design. Administrators can hide the designer button for some users.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. Promises -->
+            <div style="background-color: #ecfdf5; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #047857; margin: 0 0 10px;">OUR PROMISES</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Beautiful, and safe</h2>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_rights.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">Access rights untouched</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">The module only changes how Odoo looks. Users still see only the apps and records their rights allow.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_both.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">Validated settings</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">Every value is checked and bounded by the server; pictures are checked and limited in size.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_local.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">100% local</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">No external library, no external call, no tracking, no font downloaded from the internet.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_user.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">Clean uninstall</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">Only depends on <code>web</code>. Uninstall it and Odoo goes back to its standard look, colors included.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. FAQ -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Questions? Answers.</h2>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Does it work with Odoo Community and Enterprise?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Yes, both. On Community, the module adds its own full screen home screen. On Enterprise, it customizes the native home menu and uses Odoo's own dark mode. Odoo.sh and on-premise are supported. A version for Odoo 20 is also available.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Does it work with other themes?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Yes. When a backend theme already brings its own home menu or dark mode, the module detects it and steps aside instead of fighting it. The apps bar starts where the theme's content starts.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Can each user have a different home screen?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Yes. Every user can save a personal layout. The others keep the company layout, defined by the administrators, until they make their own.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Does hiding an app remove access to it?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">No. Hiding only declutters the home screen and the apps bar of that user. Access rights are managed by Odoo's groups, as usual.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Does the automatic refresh load the server?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Barely. It is off by default, set per view, and only reloads the data of the view on screen. It pauses when the tab is hidden, so forgotten tabs cost nothing.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Who can change the theme colors and the app icon?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">The administrators, in Settings &rarr; Home Screen. They apply to the whole database. The page reloads after saving so that everybody gets the new colors.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Does it work on phones?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Yes. The home screen adapts to small screens, and the apps bar steps aside to leave all the space to your data.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Which languages are included?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">English and French, fully translatable with Odoo's standard tools.</p>
+                </details>
+            </div>
+
+            <!-- 16. More apps by NextConception -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #714b67; margin: 0 0 10px;">MORE APPS BY NEXTCONCEPTION</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Made with the same care</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Our other modules for Odoo 19, all in English and French.</p>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_stock_cockpit.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Stock Cockpit</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Free</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Customizable inventory dashboards: stock value, stockouts, reordering, late receipts and deliveries, stock valuation, with drill-down.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/stock_cockpit" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">See on the Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_activity_tiles.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Activity Tiles</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Free</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Clickable KPI tiles and charts on any Odoo model, in personal drag and drop dashboards.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/activity_tiles" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">See on the Store &rarr;</a>
+                        </div>
+                    </div>
+<div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_purchase_cockpit.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Purchase Cockpit</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Free</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Purchase dashboards: buyer work queues with one click actions, replenishment by vendor, spend, prices and vendor scorecards.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/purchase_cockpit" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">See on the Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_collection_tracker.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Collection Tracker</h4>
+                                    <span style="display: inline-block; background-color: #ecebfb; color: #4338ca; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">72 &euro;</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Debt collection CRM: automatic multi-step reminders, collection mailboxes, risk scoring, promises, disputes and customer portal.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/collection_tracker" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">See on the Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_apps_store_tracker.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">App Store Tracker</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Free</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Downloads, ratings, comments and sales of your Store modules, competitors watch, and alerts on the updates of your installed modules.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/apps_store_tracker" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">See on the Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_threecx_connector.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">3CX Connector</h4>
+                                    <span style="display: inline-block; background-color: #ecebfb; color: #4338ca; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">29 &euro;</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Caller identification, business caller card, call log with the 3CX AI summary, missed call follow-up and click-to-call.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/threecx_connector" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">See on the Store &rarr;</a>
+                        </div>
+                    </div>                </div>
+            </div>
+            <!-- 15. Call to action -->
+            <div style="background-color: #5b21b6; border-radius: 28px; padding: 48px 40px; text-align: center;">
+                <img src="ic_support.png" alt="" style="width: 60px; height: 60px; margin-bottom: 16px;"/>
+                <h2 style="font-size: 30px; font-weight: 800; line-height: 1.15; color: #ffffff; margin: 0 0 16px;">Questions, ideas, a specific need?</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #e9e3ff; max-width: 640px; margin: 0 auto;">Open the <strong>Support</strong> tab above, or visit <a href="https://nextconception.fr" target="_blank" style="color: #ffffff; font-weight: 700;">nextconception.fr</a>.</p>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             TAB: FRANCAIS
+             =================================================================== -->
+        <div class="tab-pane fade" id="hsd-fr" role="tabpanel">
+
+            <!-- 1. Manifesto and key numbers -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <h2 style="font-size: 44px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Votre &eacute;quipe ouvre Odoo chaque matin.<br/>Faites-en un endroit qu'elle <span style="color: #6d28d9;">aime</span>.</h2>
+                <p style="font-size: 18px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 36px;">Home Screen Designer transforme la simple liste d'ic&ocirc;nes d'Odoo en un vrai &eacute;cran d'accueil : horloge, salutation, recherche, beaux fonds d'&eacute;cran et tuiles en verre. Puis il va plus loin, dans chaque application : mode sombre, barre d'applications, couleurs de votre marque, votre propre ic&ocirc;ne d'application sur t&eacute;l&eacute;phone et ordinateur, et un bouton d'actualisation qui garde vos pipelines &agrave; jour tout seul. Tout se r&egrave;gle en direct, depuis un panneau lat&eacute;ral, sans une ligne de code.</p>
+                <div class="row">
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #6d28d9; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">28</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">r&eacute;glages, aper&ccedil;u en direct</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #0d9488; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">8</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">d&eacute;grad&eacute;s, ou votre propre image</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #db2777; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">10</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">couleurs de th&egrave;me, clair et sombre</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" style="margin-bottom: 16px;">
+                        <div style="border-left-width: 3px; border-left-style: solid; border-left-color: #d97706; padding: 4px 0 4px 16px;">
+                            <div style="font-size: 44px; font-weight: 800; color: #17181c; line-height: 1;">2</div>
+                            <div style="font-size: 14px; color: #565a68; margin-top: 6px;">&eacute;ditions : Community et Enterprise</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. The home screen -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #6d28d9; margin: 0 0 10px;">L'&Eacute;CRAN D'ACCUEIL</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Un &eacute;cran d'accueil digne de ce nom</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Une grande horloge avec la date, une salutation personnelle &laquo; Bonjour &raquo;, une barre de recherche qui trouve les applications <strong>et leurs menus</strong> au fil de la frappe, et la grille d'applications sur le fond de votre choix. Sur Odoo Community, le module ajoute cet &eacute;cran d'accueil plein &eacute;cran, ouvert apr&egrave;s la connexion et depuis le bouton des applications. Sur Odoo Enterprise, il habille le menu d'accueil natif.</p>
+                <img src="hero.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 3. The live designer -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #0369a1; margin: 0 0 10px;">L'&Eacute;DITEUR EN DIRECT</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Bougez un curseur, voyez le r&eacute;sultat. Imm&eacute;diatement.</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Un clic sur l'ic&ocirc;ne de l'&eacute;diteur dans la barre du haut ouvre un panneau lat&eacute;ral. Chaque changement s'applique derri&egrave;re lui au fur et &agrave; mesure, avant m&ecirc;me l'enregistrement. <strong>Enregistrer</strong> le garde, <strong>Annuler</strong> remet tout comme avant.</p>
+                <img src="designer.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 28px;"/>
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Disposition</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">De 3 &agrave; 12 colonnes, ou grille adapt&eacute;e &agrave; la largeur de l'&eacute;cran. Espacement entre les applications de 0 &agrave; 48 px.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Ic&ocirc;nes</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Taille de 32 &agrave; 128 px, arrondi du carr&eacute; au rond, taille du texte, noms affich&eacute;s ou masqu&eacute;s, couleur du texte automatique, claire ou sombre.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Fond</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Celui d'Odoo, l'un des 8 d&eacute;grad&eacute;s ou votre propre image, avec visibilit&eacute;, voile clair ou sombre et flou.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Effets</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Tuiles en verre (glassmorphism) au flou r&eacute;glable, animation d'apparition, effet au survol : soulever, rebondir ou grossir.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Salutation &amp; horloge</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Salutation personnelle avec le pr&eacute;nom, horloge avec ou sans secondes, date. Chacune peut &ecirc;tre d&eacute;sactiv&eacute;e.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 18px;">
+                        <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Comportement</h4>
+                        <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0;">Barre de recherche sur les applications et menus, &eacute;cran d'accueil ouvert apr&egrave;s la connexion : activ&eacute;s ou non, comme vous voulez.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Backgrounds -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #db2777; margin: 0 0 10px;">FONDS D'&Eacute;CRAN</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Huit ambiances. Ou votre propre image.</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Huit d&eacute;grad&eacute;s soigneusement r&eacute;gl&eacute;s, clairs ou sombres. Vous pr&eacute;f&eacute;rez vos locaux, vos produits ou votre marque ? Envoyez n'importe quelle image : elle est redimensionn&eacute;e par le navigateur avant l'envoi, et le voile garde les textes lisibles sur toutes les images.</p>
+                <img src="presets.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 5. Apps order -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #b45309; margin: 0 0 10px;">ORDRE DES APPLICATIONS</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Vos applications, dans votre ordre</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Glissez-d&eacute;posez les applications pour mettre en premier celles que vous utilisez chaque jour. Un clic sur l'&oelig;il masque une application que vous n'ouvrez jamais, sur l'&eacute;cran d'accueil et dans la barre d'applications. Masquer ne touche qu'&agrave; l'affichage : les droits d'acc&egrave;s ne changent pas et l'application reste accessible par ses liens. Un clic de plus remet l'ordre d'Odoo.</p>
+                <img src="apps.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 6. Apps bar and top bar -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #15803d; margin: 0 0 10px;">DANS LES APPLICATIONS</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Du CRM &agrave; la Facturation en un clic</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Une <strong>barre d'applications</strong> &agrave; gauche de chaque application : ic&ocirc;nes seules, ou ic&ocirc;nes et noms. L'application en cours est mise en &eacute;vidence, l'ordre et les applications masqu&eacute;es suivent votre &eacute;cran d'accueil. La <strong>barre du haut</strong> peut garder la couleur de votre marque, ou se fondre dans la page pour un rendu sobre et moderne, en mode clair comme en mode sombre. La barre s'efface sur t&eacute;l&eacute;phone.</p>
+                <img src="appsbar.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 7. Dark mode -->
+            <div style="background-color: #17181c; border: 1px solid #2e3140; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #2dd4bf; margin: 0 0 10px;">MODE SOMBRE</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #ffffff; margin: 0 0 16px;">Le mode sombre, enfin sur Community</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #b8bccb; max-width: 820px; margin: 0 0 28px;">Odoo Community n'a pas de th&egrave;me sombre : Home Screen Designer apporte une palette sombre compl&egrave;te, construite sur les styles d'Odoo eux-m&ecirc;mes, pour toutes les vues et toutes les applications. Chaque utilisateur choisit <strong style="color: #ffffff;">Clair</strong>, <strong style="color: #ffffff;">Sombre</strong> ou <strong style="color: #ffffff;">Syst&egrave;me</strong> (suit le r&eacute;glage de l'ordinateur ou du t&eacute;l&eacute;phone), depuis le menu utilisateur ou le panneau. Sur Odoo Enterprise, le mode sombre natif est utilis&eacute; et simplement respect&eacute;.</p>
+                <img src="light_dark.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 20px;"/>
+                <img src="dark_list.png" alt="" style="width: 100%; border-radius: 18px;"/>
+            </div>
+
+            <!-- 8. Theme colors and app icon -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #be185d; margin: 0 0 10px;">VOTRE MARQUE</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Vos couleurs partout. Votre ic&ocirc;ne sur chaque t&eacute;l&eacute;phone.</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Dans les param&egrave;tres, choisissez la couleur de votre marque, la couleur principale des boutons et liens, celle de la barre du haut, et les couleurs de succ&egrave;s, d'information, d'avertissement et de danger. Elles sont <strong>compil&eacute;es dans les styles d'Odoo</strong>, pas peintes par-dessus : chaque bouton, badge, lien et barre de progression suit, dans toutes les applications. Marque, couleur principale et barre du haut peuvent avoir leur propre teinte en mode sombre. Un clic remet la palette d'Odoo.</p>
+                <img src="settings.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 28px;"/>
+                <table style="width: 100%;"><tr>
+                    <td style="width: 64px; vertical-align: top;"><img src="ic_pwa.png" alt="" style="width: 48px; height: 48px;"/></td>
+                    <td style="vertical-align: top;">
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 0 0 8px;">Application installable : votre ic&ocirc;ne, pas celle d'Odoo</h4>
+                        <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 0;">Odoo peut s'installer comme une application sur Android, iPhone, Windows, macOS et ChromeOS. Envoyez votre logo : il devient l'ic&ocirc;ne de l'application install&eacute;e, dans toutes les tailles demand&eacute;es par les appareils (&eacute;cran d'accueil de l'iPhone compris). Choisissez aussi la couleur de la barre de titre et de l'&eacute;cran de d&eacute;marrage.</p>
+                    </td>
+                </tr></table>
+            </div>
+
+            <!-- 9. Refresh -->
+            <div style="background-color: #f0fdfa; border: 1px solid #c8efe7; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #0f766e; margin: 0 0 10px;">ACTUALISATION AUTOMATIQUE</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Des donn&eacute;es toujours fra&icirc;ches, toutes seules</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Un bouton d'actualisation dans chaque vue liste, kanban, calendrier, graphique, tableau crois&eacute; ou formulaire recharge les donn&eacute;es sans recharger la page. Son menu active une <strong>actualisation automatique</strong> : toutes les 15 ou 30 secondes, toutes les 1, 2, 5, 10 ou 30 minutes. Id&eacute;al pour une file de tickets, un atelier ou un pipeline commercial sur l'&eacute;cran du bureau. Chaque vue retient son propre intervalle.</p>
+                <img src="refresh.png" alt="" style="width: 100%; border-radius: 18px; margin-bottom: 28px;"/>
+                <div style="background-color: #ffffff; border: 1px solid #c8efe7; border-radius: 18px; padding: 22px 26px;">
+                    <h4 style="font-size: 17px; font-weight: 800; color: #0f3d36; margin: 0 0 8px;">Intelligente : elle ne vous g&ecirc;ne jamais</h4>
+                    <p style="font-size: 14px; line-height: 1.7; color: #3d6b62; margin: 0;">L'actualisation automatique se met en pause quand l'onglet est cach&eacute;, quand une fen&ecirc;tre de dialogue est ouverte, quand une ligne de liste est en cours de modification ou que des enregistrements sont s&eacute;lectionn&eacute;s, et quand un formulaire a des modifications non enregistr&eacute;es. Aucune saisie perdue, aucune s&eacute;lection perdue, aucune charge inutile sur le serveur.</p>
+                </div>
+            </div>
+
+            <!-- 10. Everything included (feature list with icons) -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #6d28d9; margin: 0 0 10px;">TOUT EST INCLUS</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Un module au lieu de cinq</h2>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_home.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">01</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">&Eacute;cran d'accueil</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Horloge, date, salutation, recherche sur les applications et menus, grille d'applications. Plein &eacute;cran sur Community, menu natif sur Enterprise.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_designer.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">02</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">&Eacute;diteur en direct</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Disposition, ic&ocirc;nes, fonds, verre, animations, en-t&ecirc;te : aper&ccedil;u imm&eacute;diat, enregistr&eacute; ou annul&eacute; en un clic.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_order.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">03</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Ordre des applications</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Glisser-d&eacute;poser pour r&eacute;organiser, un clic pour masquer une application de l'accueil et de la barre.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_bar.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">04</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Barre d'applications &amp; barre du haut</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Barre lat&eacute;rale (ic&ocirc;nes, ou ic&ocirc;nes et noms), barre du haut aux couleurs de la marque ou fondue dans la page.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_dark.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">05</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Mode sombre</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Clair, sombre ou syst&egrave;me, par utilisateur. Une palette sombre compl&egrave;te pour Community, la native sur Enterprise.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_colors.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">06</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Couleurs du th&egrave;me</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Marque, couleur principale, barre du haut et couleurs d'&eacute;tat compil&eacute;es dans les styles d'Odoo, avec variantes sombres.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_pwa.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">07</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Ic&ocirc;ne d'application</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Votre logo comme ic&ocirc;ne d'Odoo install&eacute; sur t&eacute;l&eacute;phones et ordinateurs, avec couleurs de barre de titre et de d&eacute;marrage.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_refresh.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">08</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Actualisation manuelle &amp; automatique</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Un bouton d'actualisation dans les vues, et une actualisation automatique de 15 secondes &agrave; 30 minutes qui se met en pause quand il faut.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_user.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">09</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Dispositions personnelles</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Chaque utilisateur con&ccedil;oit son propre &eacute;cran d'accueil, sans jamais changer ce que voient les autres.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;"><tr>
+                            <td style="width: 64px; vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;"><img src="ic_company.png" alt="" style="width: 44px; height: 44px;"/></td>
+                            <td style="vertical-align: top; padding: 18px 0; border-top: 1px solid #e3e1f5;">
+                                <span style="font-family: Consolas, monospace; font-size: 12px; font-weight: 700; color: #6d28d9;">10</span>
+                                <h4 style="font-size: 18px; font-weight: 700; color: #17181c; margin: 2px 0 6px;">Disposition de la soci&eacute;t&eacute;</h4>
+                                <p style="font-size: 14px; line-height: 1.6; color: #565a68; margin: 0;">Les administrateurs enregistrent une disposition pour toute la soci&eacute;t&eacute;, utilis&eacute;e par tous ceux qui n'ont pas fait la leur.</p>
+                            </td>
+                        </tr></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Personal and company layouts -->
+            <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #4338ca; margin: 0 0 10px;">POUR CHACUN, POUR LA SOCI&Eacute;T&Eacute;</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">La libert&eacute; pour les utilisateurs, la coh&eacute;rence pour la soci&eacute;t&eacute;</h2>
+                <div class="row" style="margin-top: 24px;">
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div style="font-size: 72px; font-weight: 800; line-height: 1; color: #e4dcff;">1</div>
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 8px 0;">L'administrateur donne le ton</h4>
+                        <p style="font-size: 15px; line-height: 1.6; color: #4b4d63; margin: 0;">Concevez l'&eacute;cran d'accueil une fois et cliquez sur &laquo; Enregistrer comme disposition de la soci&eacute;t&eacute; &raquo; : tous les utilisateurs l'obtiennent. Couleurs et ic&ocirc;ne se r&egrave;glent dans les param&egrave;tres.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div style="font-size: 72px; font-weight: 800; line-height: 1; color: #e4dcff;">2</div>
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 8px 0;">Chacun se l'approprie</h4>
+                        <p style="font-size: 15px; line-height: 1.6; color: #4b4d63; margin: 0;">Chaque utilisateur peut changer sa disposition, l'ordre des applications, la barre d'applications et le mode sombre. Pour lui seul.</p>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div style="font-size: 72px; font-weight: 800; line-height: 1; color: #e4dcff;">3</div>
+                        <h4 style="font-size: 20px; font-weight: 800; color: #17181c; margin: 8px 0;">Retour en un clic</h4>
+                        <p style="font-size: 15px; line-height: 1.6; color: #4b4d63; margin: 0;">&laquo; Utiliser la disposition de la soci&eacute;t&eacute; &raquo; ram&egrave;ne un utilisateur au design commun. Les administrateurs peuvent masquer le bouton de l'&eacute;diteur pour certains utilisateurs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. Promises -->
+            <div style="background-color: #ecfdf5; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #047857; margin: 0 0 10px;">NOS ENGAGEMENTS</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Beau, et s&ucirc;r</h2>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_rights.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">Droits d'acc&egrave;s intacts</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">Le module ne change que l'apparence d'Odoo. Les utilisateurs ne voient toujours que les applications et enregistrements autoris&eacute;s par leurs droits.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_both.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">R&eacute;glages valid&eacute;s</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">Chaque valeur est contr&ocirc;l&eacute;e et born&eacute;e par le serveur ; les images sont v&eacute;rifi&eacute;es et limit&eacute;es en taille.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_local.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">100 % local</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">Aucune biblioth&egrave;que externe, aucun appel externe, aucun pistage, aucune police t&eacute;l&eacute;charg&eacute;e depuis internet.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 16px;">
+                        <div style="border: 1px solid #bbe7d3; border-radius: 18px; padding: 20px; background-color: #ffffff;">
+                            <table style="width: 100%;"><tr>
+                                <td style="width: 62px; vertical-align: top;"><img src="ic_user.png" alt="" style="width: 44px; height: 44px;"/></td>
+                                <td style="vertical-align: top;">
+                                    <h4 style="font-size: 17px; font-weight: 700; color: #0f3d2e; margin: 0 0 6px;">D&eacute;sinstallation propre</h4>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #3d6b5a; margin: 0;">Ne d&eacute;pend que de <code>web</code>. D&eacute;sinstallez-le et Odoo retrouve son apparence standard, couleurs comprises.</p>
+                                </td>
+                            </tr></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. FAQ -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Des questions ? Des r&eacute;ponses.</h2>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Fonctionne-t-il avec Odoo Community et Enterprise ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Oui, les deux. Sur Community, le module ajoute son propre &eacute;cran d'accueil plein &eacute;cran. Sur Enterprise, il personnalise le menu d'accueil natif et utilise le mode sombre d'Odoo. Odoo.sh et les installations sur site sont pris en charge. Une version pour Odoo 20 est aussi disponible.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Fonctionne-t-il avec d'autres th&egrave;mes ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Oui. Quand un th&egrave;me apporte d&eacute;j&agrave; son propre menu d'accueil ou mode sombre, le module le d&eacute;tecte et s'efface au lieu de le contrarier. La barre d'applications commence l&agrave; o&ugrave; commence le contenu du th&egrave;me.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Chaque utilisateur peut-il avoir un &eacute;cran d'accueil diff&eacute;rent ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Oui. Chaque utilisateur peut enregistrer sa disposition personnelle. Les autres gardent la disposition de la soci&eacute;t&eacute;, d&eacute;finie par les administrateurs, jusqu'&agrave; ce qu'ils fassent la leur.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Masquer une application en retire-t-il l'acc&egrave;s ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Non. Masquer d&eacute;sencombre seulement l'&eacute;cran d'accueil et la barre d'applications de cet utilisateur. Les droits d'acc&egrave;s restent g&eacute;r&eacute;s par les groupes d'Odoo, comme d'habitude.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>L'actualisation automatique charge-t-elle le serveur ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">&Agrave; peine. Elle est d&eacute;sactiv&eacute;e par d&eacute;faut, se r&egrave;gle vue par vue, et ne recharge que les donn&eacute;es de la vue affich&eacute;e. Elle se met en pause quand l'onglet est cach&eacute; : les onglets oubli&eacute;s ne co&ucirc;tent rien.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Qui peut changer les couleurs du th&egrave;me et l'ic&ocirc;ne ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Les administrateurs, dans Param&egrave;tres &rarr; Home Screen. Elles s'appliquent &agrave; toute la base. La page se recharge apr&egrave;s l'enregistrement pour que chacun ait les nouvelles couleurs.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Fonctionne-t-il sur t&eacute;l&eacute;phone ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Oui. L'&eacute;cran d'accueil s'adapte aux petits &eacute;crans, et la barre d'applications s'efface pour laisser toute la place &agrave; vos donn&eacute;es.</p>
+                </details>
+                <details style="border-bottom: 1px solid #ddd6fe; padding: 18px 0;">
+                    <summary style="display: block; font-size: 17px; font-weight: 700; color: #17181c;"><span style="color: #6d28d9; font-family: Consolas, monospace;">+&nbsp;&nbsp;</span>Quelles langues sont incluses ?</summary>
+                    <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 12px 0 0 28px;">Anglais et fran&ccedil;ais, enti&egrave;rement traduisible avec les outils standard d'Odoo.</p>
+                </details>
+            </div>
+
+            <!-- 16. More apps by NextConception -->
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 56px 40px; margin: 0 0 20px;">
+                <p style="font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #714b67; margin: 0 0 10px;">NOS AUTRES MODULES</p>
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Con&ccedil;us avec le m&ecirc;me soin</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 820px; margin: 0 0 28px;">Nos autres modules pour Odoo 19, tous en anglais et en fran&ccedil;ais.</p>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_stock_cockpit.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Stock Cockpit</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Gratuit</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Tableaux de bord de stock personnalisables : valeur du stock, ruptures, r&eacute;approvisionnement, r&eacute;ceptions et livraisons en retard, valorisation, avec exploration des d&eacute;tails.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/stock_cockpit" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">Voir sur le Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_activity_tiles.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Activity Tiles</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Gratuit</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Tuiles KPI cliquables et graphiques sur n'importe quel mod&egrave;le Odoo, dans des tableaux de bord personnels en glisser-d&eacute;poser.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/activity_tiles" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">Voir sur le Store &rarr;</a>
+                        </div>
+                    </div>
+<div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_purchase_cockpit.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Purchase Cockpit</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Gratuit</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Tableaux de bord achats : files de travail des acheteurs en un clic, r&#233;approvisionnement par fournisseur, d&#233;penses, prix et fiches fournisseurs.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/purchase_cockpit" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">Voir sur le Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_collection_tracker.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">Collection Tracker</h4>
+                                    <span style="display: inline-block; background-color: #ecebfb; color: #4338ca; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">72 &euro;</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">CRM de recouvrement : relances automatiques en plusieurs &eacute;tapes, bo&icirc;tes de recouvrement, score de risque, promesses, litiges et portail client.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/collection_tracker" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">Voir sur le Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_apps_store_tracker.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">App Store Tracker</h4>
+                                    <span style="display: inline-block; background-color: #e6f6f3; color: #0f766e; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">Gratuit</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">T&eacute;l&eacute;chargements, notes, commentaires et ventes de vos modules du Store, veille concurrents, et alertes sur les mises &agrave; jour de vos modules install&eacute;s.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/apps_store_tracker" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">Voir sur le Store &rarr;</a>
+                        </div>
+                    </div>                    <div class="col-md-6 col-lg-4" style="margin-bottom: 20px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 20px; padding: 24px; height: 100%;">
+                            <table style="width: 100%; margin: 0 0 14px;"><tr>
+                                <td style="width: 68px; vertical-align: middle;"><img src="nc_threecx_connector.png" alt="" style="width: 56px; height: 56px; border-radius: 14px;"/></td>
+                                <td style="vertical-align: middle;">
+                                    <h4 style="font-size: 18px; font-weight: 800; color: #17181c; margin: 0 0 6px;">3CX Connector</h4>
+                                    <span style="display: inline-block; background-color: #ecebfb; color: #4338ca; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px;">29 &euro;</span>
+                                </td>
+                            </tr></table>
+                            <p style="font-size: 14px; line-height: 1.6; color: #4b4d63; margin: 0 0 14px;">Identification de l'appelant, fiche appelant m&eacute;tier, journal d'appels avec le r&eacute;sum&eacute; IA de 3CX, suivi des appels manqu&eacute;s et click-to-call.</p>
+                            <a href="https://apps.odoo.com/apps/modules/19.0/threecx_connector" target="_blank" style="font-size: 14px; font-weight: 700; color: #4338ca; text-decoration: none;">Voir sur le Store &rarr;</a>
+                        </div>
+                    </div>                </div>
+            </div>
+            <!-- 15. Call to action -->
+            <div style="background-color: #5b21b6; border-radius: 28px; padding: 48px 40px; text-align: center;">
+                <img src="ic_support.png" alt="" style="width: 60px; height: 60px; margin-bottom: 16px;"/>
+                <h2 style="font-size: 30px; font-weight: 800; line-height: 1.15; color: #ffffff; margin: 0 0 16px;">Une question, une id&eacute;e, un besoin sp&eacute;cifique ?</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #e9e3ff; max-width: 640px; margin: 0 auto;">Ouvrez l'onglet <strong>Support</strong> ci-dessus, ou rendez-vous sur <a href="https://nextconception.fr" target="_blank" style="color: #ffffff; font-weight: 700;">nextconception.fr</a>.</p>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             TAB: CHANGELOG
+             =================================================================== -->
+        <div class="tab-pane fade" id="hsd-changelog" role="tabpanel">
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 48px 40px;">
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Changelog</h2>
+                <p style="font-size: 16px; line-height: 1.7; color: #565a68; max-width: 780px; margin: 0 0 24px;">What changed in each version. / Ce qui a chang&eacute; &agrave; chaque version.</p>
+                <!-- Version 19.0.1.0.3 -->
+                <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 22px; padding: 32px 36px; margin: 0 0 16px;">
+                    <p style="margin: 0 0 16px;">
+                        <span style="display: inline-block; background-color: #6d28d9; color: #ffffff; font-family: Consolas, monospace; font-weight: 700; font-size: 15px; border-radius: 10px; padding: 6px 12px;">19.0.1.0.3</span>
+                        &nbsp;&nbsp;<span style="font-size: 15px; font-weight: 600; color: #565a68;">October 2026 &middot; Octobre 2026</span>
+                    </p>
+                    <ul style="font-size: 15px; line-height: 1.6; padding-left: 22px; margin: 0;">
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Odoo Enterprise: a search bar on apps and menus above the apps of the home menu (Odoo only shows its own on touch screens). The "Search bar" option of the designer now applies to both editions.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Odoo Enterprise : une barre de recherche sur les applications et les menus au-dessus des applications du menu d'accueil (Odoo n'affiche la sienne que sur les &eacute;crans tactiles). L'option &laquo; Barre de recherche &raquo; du panneau s'applique d&eacute;sormais aux deux &eacute;ditions.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">New setting Settings &gt; Home Screen &gt; Personalization: by default only the administrators open the designer and every user gets the company layout; the administrators decide whether the users may save their own layout.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Nouveau r&eacute;glage Param&egrave;tres &gt; &Eacute;cran d'accueil &gt; Personnalisation : par d&eacute;faut, seuls les administrateurs ouvrent le panneau et tous les utilisateurs ont la disposition de la soci&eacute;t&eacute; ; les administrateurs d&eacute;cident si les utilisateurs peuvent enregistrer leur propre disposition.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Apps bar: no visible scrollbar any more, it still scrolls with the wheel, the touchpad or a finger.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Barre d'applications : plus de barre de d&eacute;filement visible, elle d&eacute;file toujours &agrave; la molette, au pav&eacute; tactile ou au doigt.</span>
+                        </li>
+                    </ul>
+                </div>                <!-- Version 19.0.1.0.2 -->
+                <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 22px; padding: 32px 36px; margin: 0 0 16px;">
+                    <p style="margin: 0 0 16px;">
+                        <span style="display: inline-block; background-color: #6d28d9; color: #ffffff; font-family: Consolas, monospace; font-weight: 700; font-size: 15px; border-radius: 10px; padding: 6px 12px;">19.0.1.0.2</span>
+                        &nbsp;&nbsp;<span style="font-size: 15px; font-weight: 600; color: #565a68;">October 2026 &middot; Octobre 2026</span>
+                    </p>
+                    <ul style="font-size: 15px; line-height: 1.6; padding-left: 22px; margin: 0;">
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">New app icon, drawn in the style of the Odoo 20 icons: flat shapes without a background tile, at home among the other apps of the home screen.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Nouvelle ic&ocirc;ne d'application, dessin&eacute;e dans le style des ic&ocirc;nes d'Odoo 20 : des formes plates sans tuile de fond, &agrave; sa place parmi les autres applications de l'&eacute;cran d'accueil.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">The other apps by NextConception show their new icons too.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Les autres applications de NextConception affichent aussi leurs nouvelles ic&ocirc;nes.</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Version 19.0.1.0.1 -->
+                <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 22px; padding: 32px 36px; margin: 0 0 16px;">
+                    <p style="margin: 0 0 16px;">
+                        <span style="display: inline-block; background-color: #6d28d9; color: #ffffff; font-family: Consolas, monospace; font-weight: 700; font-size: 15px; border-radius: 10px; padding: 6px 12px;">19.0.1.0.1</span>
+                        &nbsp;&nbsp;<span style="font-size: 15px; font-weight: 600; color: #565a68;">October 2026 &middot; Octobre 2026</span>
+                    </p>
+                    <ul style="font-size: 15px; line-height: 1.6; padding-left: 22px; margin: 0;">
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Odoo Enterprise: the app icons of the home menu are shown without the white tile drawn by Odoo, with the corner radius chosen in the designer.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Odoo Enterprise : les ic&ocirc;nes du menu d'accueil s'affichent sans la tuile blanche dessin&eacute;e par Odoo, avec l'arrondi choisi dans le panneau.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Dark mode: the opened drop-down lists are readable again, with a dark background and a light text.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Mode sombre : les listes d&eacute;roulantes ouvertes sont de nouveau lisibles, sur fond sombre avec un texte clair.</span>
+                        </li>
+                    </ul>
+                </div>                <!-- Version 19.0.1.0.0 -->
+                <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 22px; padding: 32px 36px; margin: 0 0 16px;">
+                    <p style="margin: 0 0 16px;">
+                        <span style="display: inline-block; background-color: #6d28d9; color: #ffffff; font-family: Consolas, monospace; font-weight: 700; font-size: 15px; border-radius: 10px; padding: 6px 12px;">19.0.1.0.0</span>
+                        &nbsp;&nbsp;<span style="font-size: 15px; font-weight: 600; color: #565a68;">October 2026 &middot; Octobre 2026</span>
+                    </p>
+                    <ul style="font-size: 15px; line-height: 1.6; padding-left: 22px; margin: 0;">
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">First release on the Odoo Apps Store.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Premi&egrave;re publication sur l'Odoo Apps Store.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Home screen with clock, greeting and search (Community), customization of the native home menu (Enterprise).</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">&Eacute;cran d'accueil avec horloge, salutation et recherche (Community), personnalisation du menu d'accueil natif (Enterprise).</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Live designer: layout, icons, 8 gradients or a picture, glass tiles, animations; personal and company layouts.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">&Eacute;diteur en direct : disposition, ic&ocirc;nes, 8 d&eacute;grad&eacute;s ou une image, tuiles en verre, animations ; dispositions personnelles et de la soci&eacute;t&eacute;.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Apps order and hidden apps, apps bar inside the apps, blended or colored top bar.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Ordre et masquage des applications, barre d'applications dans les applications, barre du haut fondue ou color&eacute;e.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Dark mode (light, dark, system), with a full dark palette for Community.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Mode sombre (clair, sombre, syst&egrave;me), avec une palette sombre compl&egrave;te pour Community.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Theme colors with dark variants, custom icon and colors of the installed app.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Couleurs du th&egrave;me avec variantes sombres, ic&ocirc;ne et couleurs personnalis&eacute;es de l'application install&eacute;e.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">Refresh button in the views and automatic refresh from 15 seconds to 30 minutes.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Bouton d'actualisation dans les vues et actualisation automatique de 15 secondes &agrave; 30 minutes.</span>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span style="color: #17181c;">English and French translations.</span><br/>
+                            <span style="color: #565a68; font-size: 14px;">Traductions anglaise et fran&ccedil;aise.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             TAB: SUPPORT
+             =================================================================== -->
+        <div class="tab-pane fade" id="hsd-support" role="tabpanel">
+            <div style="background-color: #f6f5ff; border: 1px solid #e3e1f5; border-radius: 28px; padding: 48px 40px;">
+                <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; color: #17181c; margin: 0 0 16px;">Support</h2>
+                <div class="row" style="margin-top: 16px;">
+                    <div class="col-md-6" style="margin-bottom: 24px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 22px; padding: 32px; height: 100%;">
+                            <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #6d28d9; margin: 0 0 8px;">ENGLISH</p>
+                            <h3 style="font-size: 24px; font-weight: 800; color: #17181c; margin: 0 0 12px;">We are here to help</h3>
+                            <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 0 0 16px;">Home Screen Designer is built and maintained by NextConception. Reach us for anything related to the module:</p>
+                            <ul style="font-size: 15px; line-height: 1.6; color: #4b4d63; padding-left: 22px; margin: 0 0 24px;">
+                                <li style="margin-bottom: 8px;">Installation and configuration help</li>
+                                <li style="margin-bottom: 8px;">Bug reports and questions</li>
+                                <li style="margin-bottom: 8px;">Feature requests</li>
+                                <li style="margin-bottom: 8px;">Custom developments for your company</li>
+                            </ul>
+                            <a href="mailto:contact@nextconception.fr" style="display: inline-block; background-color: #6d28d9; color: #ffffff; font-weight: 700; font-size: 16px; text-decoration: none; border-radius: 14px; padding: 14px 24px;">Contact us by e-mail</a>
+                            <p style="font-size: 13px; line-height: 1.6; color: #6b6f80; margin: 14px 0 0;">Module page: nextconception.fr/module-home-screen-designer.html, also linked as <strong>Website</strong> at the top of this page.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 24px;">
+                        <div style="background-color: #ffffff; border: 1px solid #e3e1f5; border-radius: 22px; padding: 32px; height: 100%;">
+                            <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: #6d28d9; margin: 0 0 8px;">FRAN&Ccedil;AIS</p>
+                            <h3 style="font-size: 24px; font-weight: 800; color: #17181c; margin: 0 0 12px;">Nous sommes l&agrave; pour vous aider</h3>
+                            <p style="font-size: 15px; line-height: 1.7; color: #4b4d63; margin: 0 0 16px;">Home Screen Designer est d&eacute;velopp&eacute; et maintenu par NextConception. Contactez-nous pour tout ce qui concerne le module :</p>
+                            <ul style="font-size: 15px; line-height: 1.6; color: #4b4d63; padding-left: 22px; margin: 0 0 24px;">
+                                <li style="margin-bottom: 8px;">Aide &agrave; l'installation et au param&eacute;trage</li>
+                                <li style="margin-bottom: 8px;">Signalement de bugs et questions</li>
+                                <li style="margin-bottom: 8px;">Demandes de nouvelles fonctionnalit&eacute;s</li>
+                                <li style="margin-bottom: 8px;">D&eacute;veloppements sur mesure pour votre entreprise</li>
+                            </ul>
+                            <a href="mailto:contact@nextconception.fr" style="display: inline-block; background-color: #6d28d9; color: #ffffff; font-weight: 700; font-size: 16px; text-decoration: none; border-radius: 14px; padding: 14px 24px;">Nous &eacute;crire par e-mail</a>
+                            <p style="font-size: 13px; line-height: 1.6; color: #6b6f80; margin: 14px 0 0;">Page du module : nextconception.fr/module-home-screen-designer.html, aussi accessible par le lien <strong>Website</strong> en haut de cette page.</p>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #565a68; text-align: center; margin: 8px 0 0;">
+                    You can also use the <strong>Contact</strong> button of this page. /
+                    Vous pouvez aussi utiliser le bouton <strong>Contact</strong> de cette page.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</section>
