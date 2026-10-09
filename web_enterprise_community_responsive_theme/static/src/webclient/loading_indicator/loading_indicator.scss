@@ -1,0 +1,46 @@
+// Copyright Badirra / Mahmoud Salheen — All rights reserved.
+// Author: Mahmoud Salheen
+// License OPL-1 (Odoo Proprietary License v1.0) — see the LICENSE file.
+//
+// Odoo's own loading indicator (web.LoadingIndicator) is a plain
+// bottom-right "Loading" text tag; this restyles it into a branded pill
+// with a real spinner, matching the rest of the theme instead of core's
+// bare Odoo-purple rectangle. CSS-only: the component/template are
+// untouched.
+
+.o_loading_indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    background-color: $o-brand-badirra;
+    color: #fff;
+    padding: .5rem 1rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: .8125rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .2);
+
+    &::before {
+        content: "";
+        flex: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, .35);
+        border-top-color: #fff;
+        animation: o-badirra-spin .6s linear infinite;
+    }
+}
+
+@keyframes o-badirra-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// The full-screen blocking overlay Odoo shows for longer-running actions.
+.o_blockUI:not(.o_blockUI_invisible) {
+    background: rgba($o-brand-badirra, .55);
+}

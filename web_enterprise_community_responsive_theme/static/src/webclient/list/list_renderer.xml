@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Adds a small, desktop-only density toggle button to every list
+         view. It is appended inside the renderer's own root node and
+         positioned with CSS, so it never assumes anything about the
+         renderer's internal markup — safe against future core changes. -->
+    <t t-name="web_enterprise_community_responsive_theme.ListRenderer"
+       t-inherit="web.ListRenderer" t-inherit-mode="extension">
+        <xpath expr="." position="attributes">
+            <attribute name="class" add="o_badirra_list_renderer" separator=" "/>
+            <attribute name="t-att-data-badirra-density">badirraState.dense ? 'compact' : 'comfortable'</attribute>
+        </xpath>
+        <xpath expr="." position="inside">
+            <div class="o_badirra_list_density_toggle d-none d-lg-flex">
+                <button type="button"
+                        class="btn btn-sm o_badirra_density_btn"
+                        t-on-click="onBadirraToggleDensity"
+                        t-att-title="badirraDensityLabel">
+                    <i class="fa fa-compress" t-if="!badirraState.dense"/>
+                    <i class="fa fa-arrows-v" t-if="badirraState.dense"/>
+                    <span class="d-none d-xl-inline ms-1" t-esc="badirraDensityLabel"/>
+                </button>
+            </div>
+        </xpath>
+    </t>
+
+</templates>
